@@ -1,0 +1,35 @@
+<%- include('partials/header') %>
+
+<div class="blog-holder">
+	<h1 id="blog-header">Welcome to my Test Blog!</h1>
+	<hr>
+	<p id="home-content">I built this simple Node.js application as a part of London App Brewery's Full-Stack Developer online bootcamp. Simply click the <strong>COMPOSE</strong> tab from the navigation bar, and write away!<br><br>The application was designed so that a maximum of 200 characters can be viewed on the home page. If the post was longer than that, a <strong>'...Read More'</strong> element appears, and using EJS, will link to it's own post page.<br><br>These links are available through <strong>/posts/:postId</strong> once they have been composed. Thanks for stopping by and checking it out!</p>
+
+	<!-- <% for (var i=0; i<postArray.length; i++) { %>
+		<h1><%= postArray[i].title %></h1>
+		<p><%= postArray[i].body %></p>
+	<% } %> -->
+
+	<% let count = 0 %>
+
+	<% postArray.forEach((obj) => { %>
+		<div id="post_<%= count %>" class="post_container">
+			<h6 class="post-date"><%= obj.time %></h6>
+			<% count++ %>
+			<h1 class="post-title"><%= obj.title %></h1>
+			<hr>
+			<h2><%= obj.author + ' at ' + obj.clock %></h2>
+			<hr>
+			<p class="home-post-body">
+				<% if ((obj.body).length > 200) { %>
+					<%= (obj.body).substring(0, 200) + '...' %>
+					<a href="/posts/<%= obj.title %>">Read more</a>
+				 <% } else { %>
+					<%= obj.body %>
+				<% } %>
+			</p>
+		</div>
+	<% }); %>
+</div>
+
+<%- include('partials/footer') %>
