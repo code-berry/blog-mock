@@ -14,6 +14,8 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
+const PORT = process.env.PORT || 3000;
+
 let posts = [
 	{
 		title: 'Breaking up Big Tech',
@@ -90,6 +92,6 @@ app.post('/compose', (req, res) => {
 	res.redirect('/');
 });
 
-app.listen(3000, function() {
-  console.log("Server started on port 3000");
+app.listen(PORT, () => {
+  console.log("Server started on port ", port);
 });
